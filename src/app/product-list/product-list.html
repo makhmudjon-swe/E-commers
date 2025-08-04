@@ -1,5 +1,12 @@
-<ul>
-  @for (item of productList(); track item.id) {
-  <li>{{item.description}}</li>
-  }
-</ul>
+<div class="max-w-screen-xl mx-auto">
+  <div class="flex mt-20 flex-col justify-center items-center gap-2 py-11">
+    <h1 class="text-blue-700 font-bold text-5xl">Welcome to E-shop!</h1>
+    <p class="text-lg font-medium">Your on-stop shop for all your needs!</p>
+  </div>
+  <h2 class="text-3xl font-bold">Product List</h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-3 gap-3">
+    @for (item of productList(); track item.id) {
+    <app-product-card [item]="item"></app-product-card>
+    }
+  </div>
+</div>

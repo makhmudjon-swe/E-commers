@@ -1,0 +1,65 @@
+<div class="mt-20">
+  <div class="flex flex-col justify-center items-center py-10">
+    <h1 class="text-blue-700 text-5xl font-bold">Our product</h1>
+  </div>
+  @for (item of cart(); track item.id) {
+  <div>
+    <div
+      class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row"
+    >
+      <img
+        class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+        [src]="item.product.image"
+        alt=""
+      />
+      <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight">
+          {{item.product.title}}
+        </h5>
+        <p class="mb-3 font-normal">{{item.product.description}}</p>
+        <h4 class="text-2xl font-medium text-blue-700">
+          {{item.product.price | currency}}
+        </h4>
+        <div class="flex flex-col justify-start items-start mt-3">
+          <span class="flex justify-center items-center gap-2">
+            <button
+              (click)="increase(item.id , item.quantity)"
+              type="button"
+              class="text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              -
+            </button>
+            <span class="text-lg font-medium">{{item.quantity}}</span>
+            <button
+              (click)="decrease(item.id, item.quantity)"
+              type="button"
+              class="text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              +
+            </button>
+          </span>
+          <button
+            (click)="remove(item.id)"
+            type="button"
+            class="text-white cursor-pointer bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+  <div class="shadow bg-white p-5 flex justify-end rounded-md mt-5">
+    <div class="flex flex-col">
+      <h1 class="font-bold text-2xl">Total {{totalPrice() | currency}}</h1>
+      <button
+        (click)="clear()"
+        type="button"
+        class="text-white cursor-pointer bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+</div>
