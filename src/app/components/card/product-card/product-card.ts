@@ -24,16 +24,20 @@ export class ProductCard {
 
   addCart(product: IProduct): void {
     const cartItem = { product, quantity: 1 };
-
-    this.cartService.addCart(cartItem).subscribe({
-      next: () => {
+    this.cartService.addToCart(cartItem, product.id).subscribe((isAdded) => {
+      if (isAdded) {
         this._snackBar.open('Product added to cart!', '', {
           duration: 2000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
         });
-        
-      },
+      } else {
+        this._snackBar.open('Product quantity increased!', '', {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      }
     });
   }
 }

@@ -2,10 +2,12 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { CurrencyPipe } from '@angular/common';
 import { ICart } from '../models/cart';
+import { RouterLink } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-shop-cart',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './shop-cart.html',
   styleUrl: './shop-cart.css',
 })
