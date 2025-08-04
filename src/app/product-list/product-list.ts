@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProductService } from '../services/product-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
-import { TruncatePipe } from '../pipes/truncate-pipe';
-import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { ProductCard } from '../components/card/product-card/product-card';
 
 @Component({
@@ -15,8 +13,22 @@ import { ProductCard } from '../components/card/product-card/product-card';
 })
 export class ProductList {
   productService = inject(ProductService);
+  search = signal('');
 
   productList = toSignal(this.productService.getProduct(), {
     initialValue: [],
   });
+
+  filteredProduct = computed(() => {
+    const query = this.search().toLowerCase();
+    return this.productList().filter(
+      (product) =>
+        product.title.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query)
+    );
+  });
+
+  constructor() {
+    console.log(this.filteredProduct);
+  }
 }
